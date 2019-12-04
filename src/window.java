@@ -10,12 +10,15 @@ public class window extends JFrame{
 	private JLabel status = new JLabel("", SwingConstants.LEFT);
 	private	JLabel LPrimedigits = new JLabel("", SwingConstants.CENTER);
 	private JLabel LHexDigits = new JLabel("", SwingConstants.CENTER);
-	private JLabel numberOfPrimes = new JLabel("", SwingConstants.LEFT);
-	private JLabel numberOfHexnew  = new JLabel("",SwingConstants.LEFT);
+	private JLabel numberOfPrimes = new JLabel("", SwingConstants.CENTER);
+	private JLabel numberOfHexnew  = new JLabel("",SwingConstants.CENTER);
 	
 	window(String Name, Primes p) {
 		super(Name);
 		primes = p;
+		numberOfPrimes.setFont(new Font("Tahoma",Font.BOLD,17));
+		numberOfHexnew.setFont(new Font("Tahoma",Font.BOLD,17));
+		status.setFont(new Font("Tahoma",Font.PLAIN,20));
 		updateValues("No Operation Completed");
 		this.setSize(1000,400);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,11 +43,14 @@ public class window extends JFrame{
 		JLabel primeFile = new JLabel("Primes File", SwingConstants.LEFT);
 		primeFile.setFont(new Font("Tahoma",Font.PLAIN,30));
 		
-		JButton primeSave = new JButton("Save Primes");
+		JButton primeSave = new JButton("Save");
+		primeSave.setFont(new Font("Tahoma",Font.PLAIN,16));
 		
-		JButton primeLoad = new JButton("Load Primes");
+		JButton primeLoad = new JButton("Load");
+		primeLoad.setFont(new Font("Tahoma",Font.PLAIN,16));
 		
-		JTextField primeFileNameField = new JTextField("primesFile.txt",55);  
+		JTextField primeFileNameField = new JTextField("primesFile.txt",50);
+		primeFileNameField.setFont(new Font("Tahoma",Font.PLAIN,15));
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.anchor = GridBagConstraints.WEST;
@@ -66,14 +72,12 @@ public class window extends JFrame{
 		secondPanel.setLayout(new GridLayout(1,2));
 		secondPanel.add(primeFile);
 		
+		JPanel ButtonPanel = new JPanel(new GridLayout(1,4,2,2));
+		ButtonPanel.add(new JLabel());
+		ButtonPanel.add(new JLabel());
+		ButtonPanel.add(primeLoad);
+		ButtonPanel.add(primeSave);
 		
-		JPanel ButtonPanel = new JPanel(new GridBagLayout());
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		gbc.gridx = 0;
-		gbc.gridx = 0;
-		ButtonPanel.add(primeLoad,gbc);
-		gbc.gridx =1;
-		ButtonPanel.add(primeSave,gbc);
 		secondPanel.add(ButtonPanel);
 		
 		primesPanel.add(innerPanelText);
@@ -110,9 +114,12 @@ public class window extends JFrame{
 		JLabel hexFile = new JLabel("Hexagon Cross File",SwingConstants.LEFT);
 		
 		//buttons to save hex and load hex
-		JButton hexSave = new JButton("Save Hex Cross");
-		JButton hexLoad = new JButton("Load Hex Cross");
-		JTextField hexFileNameField = new JTextField("hexCross.txt",62);
+		JButton hexSave = new JButton("Save");
+		hexSave.setFont(new Font("Tahoma",Font.PLAIN,16));
+		JButton hexLoad = new JButton("Load");
+		hexLoad.setFont(new Font("Tahoma",Font.PLAIN,16));
+		JTextField hexFileNameField = new JTextField("hexCross.txt",50);
+		hexFileNameField.setFont(new Font("Tahoma",Font.PLAIN,15));
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.anchor = GridBagConstraints.WEST;
@@ -136,12 +143,10 @@ public class window extends JFrame{
 		secondPanel.add(hexFile);
 		
 		
-		JPanel ButtonPanel = new JPanel(new GridBagLayout());
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		gbc.gridx = 0;
-		gbc.gridx = 0;
+		JPanel ButtonPanel = new JPanel(new GridLayout(1,4,2,2));
+		ButtonPanel.add(new JLabel());
+		ButtonPanel.add(new JLabel());
 		ButtonPanel.add(hexLoad,gbc);
-		gbc.gridx =1;
 		ButtonPanel.add(hexSave,gbc);
 		secondPanel.add(ButtonPanel);
 		
@@ -281,7 +286,7 @@ public class window extends JFrame{
 						updateValues("Successful Generation of Primes");
 					}
 				}catch(NumberFormatException ex) {
-					updateValues("Bad input of Numbers please check size starting number and number of primes text box");
+					updateValues("Bad input of Numbers please check Starting number and number of primes text box");
 				}
 			}
 		});
@@ -316,10 +321,10 @@ public class window extends JFrame{
 	}
 	private void updateValues(String s) {
 		status.setText("Status: " + s);
-		numberOfPrimes.setText("Number of Primes: " + Integer.toString(primes.primeCount()));
+		numberOfPrimes.setText(Integer.toString(primes.primeCount()));
 		LPrimedigits.setText("The Largest Prime has " + Integer.toString(primes.sizeofLastPrime()) + " digits");
 		LHexDigits.setText("The Largest Cross has " + primes.sizeofLastCross().left() + " and " +  primes.sizeofLastCross().right() + " digits");
-		numberOfHexnew.setText("Number of Hexagonal Crosses: " + Integer.toString(primes.crossesCount()));
+		numberOfHexnew.setText(Integer.toString(primes.crossesCount()));
 	}
 	private GridBagConstraints getConstraints(int posX,int posY, int padX, int padY) {
 		GridBagConstraints gbc = new GridBagConstraints();  
