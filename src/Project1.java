@@ -5,7 +5,7 @@ public class Project1 {
 	{
 		// Instantiate Primes Class
 		Primes p = new Primes();
-		window wind = new window(Config.APPLICATIONNAME,p);
+		MainWindow wind = new MainWindow(Config.APPLICATIONNAME,p);
 		
 		/*Primes p1 =new Primes();
 		p1.generatePrimes(2, 12);
